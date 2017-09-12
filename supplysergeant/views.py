@@ -5,20 +5,29 @@ from flask import render_template, abort
 from . import app
 from .database import session, Item
 
-PAGINATE_BY = 10
 
-@app.route("/")
-@app.route("/page/<int:page>")
+@app.route("/", methods=["GET","POST"])
+@app.route("/page/<int:page>", methods=["GET","POST"])
+@app.route("/?limit=<int:per_page>", methods=["GET","POST"])
+@app.route("/page/<int:page>?limit=<int:per_page>", methods=["GET","POST"])
 def items(page=1):
     # Zero-indexed page
     page_index = page - 1
 
+    if request.args.get('limit'):
+        per_page = request.args.get('limit', type=int)  # if limit is added to the url
+    else:
+        per_page = 10  # default
+
     count = session.query(Item).count()
 
-    start = page_index * PAGINATE_BY
-    end = start + PAGINATE_BY
+    if per_page > count:
+        per_page = count
 
-    total_pages = (count - 1) // PAGINATE_BY + 1
+    start = page_index * per_page
+    end = start + per_page
+
+    total_pages = (count - 1) // per_page + 1
     has_next = page_index < total_pages - 1
     has_prev = page_index > 0
 
@@ -31,7 +40,8 @@ def items(page=1):
         has_next=has_next,
         has_prev=has_prev,
         page=page,
-        total_pages=total_pages
+        total_pages=total_pages,
+        per_page=per_page
     )
     
 
