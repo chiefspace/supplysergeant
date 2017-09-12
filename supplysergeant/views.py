@@ -1,3 +1,4 @@
+import datetime
 from flask import render_template
 
 from . import app
@@ -31,3 +32,23 @@ def items(page=1):
         page=page,
         total_pages=total_pages
     )
+    
+
+@app.route("/item/add", methods=["GET"])
+def add_item_get():
+    return render_template("add_item.html")
+
+from flask import request, redirect, url_for
+
+@app.route("/item/add", methods=["POST"])
+def add_item_post():
+    item = Item(
+        item_name=request.form["item_name"],
+        assignee_name=request.form["assignee_name"],
+        item_description=request.form["item_description"],
+        item_cost=request.form["item_cost"],
+        date_assigned=datetime.datetime.today()
+    )
+    session.add(item)
+    session.commit()
+    return redirect(url_for("items"))
