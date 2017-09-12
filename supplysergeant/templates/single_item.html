@@ -1,0 +1,11 @@
+{% import "macros.html" as macros %}
+{% extends "base.html" %}
+
+{% block content %}
+{{macros.render_item(item)}}
+
+<a href="{{ item.href }}/item/{{ item.id }}/edit">edit</a>
+<a href="{{ item.href }}/item/{{ item.id }}/delete">delete</a>
+
+
+{% endblock %}
