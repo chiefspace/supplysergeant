@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>
+    Add Item
+</h1>
+
+<form role="form" method="POST">
+    <div class="form-group">
+        <label for="item_name">Item Name</label>
+        <input type="text" class="form-control" id="item_name" name="item_name" placeholder="Item name" required>
+    </div>
+    <div class="form-group">
+        <label for="assignee_name">Assignee Name</label>
+        <input type="text" class="form-control" id="assignee_name" name="assignee_name" placeholder="Assignee name" required>
+    </div>
+    <div class="form-group">
+        <label for="item_description">Item Description</label>
+        <textarea class="form-control" id="item_description" name="item_description" placeholder="Item description" rows="20" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="item_cost">Item Cost</label>
+        <input type="float" class="form-control" id="item_cost" name="item_cost" placeholder="Item Cost" required>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+{% endblock %}
