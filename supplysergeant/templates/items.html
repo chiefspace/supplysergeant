@@ -1,0 +1,9 @@
+{% import "macros.html" as macros %}
+{% extends "base.html" %}
+{% block content %}
+
+{% for item in items %}
+{{ macros.render_item(item) }}
+{% endfor %}
+
+{% endblock %}
