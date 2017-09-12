@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>
+    Edit Item
+</h1>
+
+<script type="text/javascript">
+function save(){
+var text_to_save=document.getElementById('content').value;
+localStorage.setItem("text", text_to_save); // save the item
+}
+
+function retrieve(){
+var text=localStorage.getItem("text"); // retrieve
+document.getElementById('form-group').innerHTML = text; // display
+}
+
+</script>
+
+<form role="form" method="POST">
+    <div class="form-group" id="form-group">
+        <label for="item_name">Item Name</label>
+        <input type="text" class="form-control" id="item_name" name="item_name" value="{{ item.item_name }}" required>
+    </div>
+    <div class="form-group" id="form-group">
+        <label for="assignee_name">Assignee Name</label>
+        <input type="text" class="form-control" id="assignee_name" name="assignee_name" value="{{ item.assignee_name }}" required>
+    </div>
+    <div class="form-group">
+        <label for="item_description">Item Description</label>
+        <input type="text" class="form-control" id="item_description" name="item_description" value="{{ item.item_description }}" rows="20" required>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+{% endblock %}

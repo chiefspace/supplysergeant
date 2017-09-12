@@ -1,4 +1,5 @@
 import datetime
+import mistune
 from flask import render_template
 
 from . import app
@@ -58,3 +59,21 @@ def add_item_post():
 def single_item(item_id):
     item = session.query(Item).filter(Item.id == item_id).first()
     return render_template("single_item.html", item=item)
+    
+    
+@app.route("/item/<int:item_id>/edit", methods=["GET"])
+def edit_item_get(item_id):
+    item = session.query(Item).get(item_id)
+
+    return render_template("edit_item.html", item=item)
+
+
+@app.route("/item/<int:item_id>/edit", methods=["POST"])
+def edit_item_item(item_id):
+    if request.method == "POST":
+        item = session.query(Item).get(item_id)
+        item.item_name = request.form["item_name"],
+        item.item_description = mistune.markdown(request.form["item_description"])
+        session.add(item)
+        session.commit()
+        return redirect(url_for("items"))
