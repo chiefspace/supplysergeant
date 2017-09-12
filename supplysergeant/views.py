@@ -1,6 +1,6 @@
 import datetime
 import mistune
-from flask import render_template
+from flask import render_template, abort
 
 from . import app
 from .database import session, Item
@@ -77,3 +77,21 @@ def edit_item_item(item_id):
         session.add(item)
         session.commit()
         return redirect(url_for("items"))
+        
+@app.route("/item/<int:item_id>/delete", methods=["GET", "POST"])
+def delete_item_get(item_id=1):
+    item = session.query(Item).get(item_id)
+
+    if item is None:
+        abort(404)
+    return render_template("delete_item.html", item=item)
+
+
+@app.route("/delete/confirmation/<int:item_id>", methods=["GET"])
+def delete_item_confirmed(item_id):
+    item = session.query(Item).get(item_id)
+    if item is None:
+        abort(404)
+    session.delete(item)
+    session.commit()
+    return render_template("delete_confirmation.html")

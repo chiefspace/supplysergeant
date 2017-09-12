@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<ul>
+	<li>item ID: {{ item.id }}</li>
+	<li>Item Name: {{ item.item_name }}</li>
+	<li>Assignee Name: {{ item.assignee_name }}</li>
+	<li>Item Description: {{ item.item_description }}</li>
+	<li>Item Cost: {{ item.item_cost }}</li>
+	<li>Last date assigned: {{ item.date_assigned }}</li>
+</ul>
+<div id="deletelinks">
+	<a href="/delete/confirmation/{{ item.id }}">Delete item</a> | <a href="{{ url_for('items') }}">Cancel</a>
+
+{% endblock %}
