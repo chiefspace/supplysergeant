@@ -52,3 +52,9 @@ def add_item_post():
     session.add(item)
     session.commit()
     return redirect(url_for("items"))
+    
+    
+@app.route("/item/<int:item_id>")
+def single_item(item_id):
+    item = session.query(Item).filter(Item.id == item_id).first()
+    return render_template("single_item.html", item=item)
