@@ -3,15 +3,16 @@
     <div class="col-md-2 text-right metadata">
         <ul class="list-unstyled">
             <li>
-                {{ item.datetime | dateformat("%d/%m/%y") }}
+                <a href="{{ item.href }}/item/{{ item.id }}">{{ item.item_name }}
             </li>
         </ul>
     </div>
     <div class="col-md-10">
         <h1>
-            {{ item.title }}
+            {{ item.assignee_name }} Date Assigned: {{ item.date_assigned | dateformat("%d/%m/%y") }}
         </h1>
-        {{ item.content | markdown }}
+        {{ item.item_description | markdown }}
+        {{ item.item_cost | string }}
     </div>
 </div>
 {% endmacro %}
