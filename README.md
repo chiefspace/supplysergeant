@@ -33,9 +33,9 @@ The following **additional** features are **to be** implemented:
 
 * [ ] Purchase request approval workflow [ i.e someone requests a new computer, that will trigger an email to the CAPEX committee]
 
-## Mockup on Balsamiq:
+## Mockup as created on Balsamiq (now hosted in an s3 bucket):
 
-<img src='https://autodidactica.mybalsamiq.com/mockups/5883960.png?key=0944258a85141fb06484b669a7cf3b95451f585e' title='Supply Sergeant Mockup' width='' alt='Supply Sergeant Mockup' />
+<img src='https://s3.amazonaws.com/supply-sergeant-mockup/SupplySergeant_Mockup_on_Balsamiq.png' title='Supply Sergeant Mockup' width='' alt='Supply Sergeant Mockup' />
 
 ## Video Walkthrough 
 
